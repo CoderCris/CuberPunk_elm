@@ -1,0 +1,43 @@
+module Main exposing (main)
+
+import Browser exposing (Document, UrlRequest)
+import Browser.Navigaiton exposing (Key)
+import Html exposing (Html)
+import Url exposing (Url)
+
+type alias Flags =
+    {}
+
+type alias Model =
+    {name : String}
+
+type Msg =
+    NoOp
+
+init : Flags -> Url -> Key -> (Model, Cmd Msg)
+init flags url key =
+    (Model "Sak", Cmd.none)
+
+view : Model -> Document Msg
+view model =
+    { title = "Hello, World!"
+        , body = 
+        [Html.p [] [Html.text "Hello World!"]
+        ]
+    }
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    case msg of
+        NoOp ->
+            (model, Cmd.none)
+
+main =
+    Browser.application
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+        , onUrlRequest = onUrlRequest
+        , onUrlChange = onUrlChange
+        }
